@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        *{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 105%;
+        }
+        body{
+            min-height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 2%;
+        }
+    </style>
+</head>
+<body>
+    <div id="main--container">
+
+    </div>
+    <div id="result">
+        <p style="font-weight: 600;" id="showResult"></p>
+    </div>
+</body>
+<script>
+    let container = document.querySelector("#main--container")
+
+    let heading = document.createElement("h1")
+    heading.innerText = "Check Your BMI"
+
+    let text1 = document.createElement("p")
+    text1.innerText = "Enter your Weight and Height below to check your BMI results"
+
+
+
+    let text2 = document.createElement("p")
+    text2.innerText = "Put your Weight here (KG)"
+
+    let inputOne = document.createElement("div")
+    inputOne.innerHTML = "<input id='inputOne' placeholder='enter your weight'>"
+
+
+
+    let text3 = document.createElement("p")
+    text3.innerText = "Put your Height here (M)"
+
+    let inputTwo = document.createElement("div")
+    inputTwo.innerHTML = "<input id='inputTwo' placeholder='enter your height'>"
+    
+
+    let calBtn = document.createElement("button")
+    calBtn.innerText = "Calculate BMI"
+    calBtn.addEventListener("click",function(){
+        let w = parseFloat(document.getElementById("inputOne").value)
+        let h = parseFloat(document.getElementById("inputTwo").value)
+
+        let sqrH = h*h
+        let res = w / sqrH;
+
+        let fixedRes = res.toFixed(2)
+
+        if(fixedRes<= 18.4){
+            document.getElementById("showResult").innerText = `Your BMI is ${fixedRes} and You are UnderWeight.`
+        }
+        else if(fixedRes >= 18.5 && fixedRes <= 24.9){
+            document.getElementById("showResult").innerText = `Your BMI is ${fixedRes} and You have Normal Weight.`
+        }
+        else if(fixedRes >= 25 && fixedRes <= 29.9){
+            document.getElementById("showResult").innerText = `Your BMI is ${fixedRes} and You are OverWeight.`
+        }
+        else{
+            document.getElementById("showResult").innerText = `Your BMI is ${fixedRes} and You are Obese.`
+        }         
+    })
+
+    container.append(heading, text1, text2, inputOne, text3, inputTwo, calBtn)
+</script>
+</html>
